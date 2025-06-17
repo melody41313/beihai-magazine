@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>北海株式會社 - 社畜小菜鳥社刊</title>
+  <style>
+    body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8f8f8; color: #333; margin: 0; padding: 0; }
+    nav { background-color: #005aaa; display: flex; justify-content: center; padding: 1rem; }
+    nav a { color: white; text-decoration: none; margin: 0 1rem; font-weight: bold; }
+    .filter-bar { display: flex; justify-content: center; gap: 1rem; margin: 2rem 0 1rem; }
+    .filter-bar button { padding: 0.5rem 1rem; border: none; border-radius: 20px; cursor: pointer; background-color: #ccc; }
+    .filter-bar button.active { background-color: #005aaa; color: white; }
+    main { padding: 2rem; max-width: 960px; margin: auto; }
+    .section { margin-bottom: 3rem; }
+    .section h2 { border-left: 6px solid #005aaa; padding-left: 0.75rem; font-size: 1.8rem; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .card { background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); padding: 1rem; transition: transform 0.2s; }
+    .card:hover { transform: scale(1.02); }
+    .card h3 { margin: 0.5rem 0 0.25rem; }
+    .tag { display: inline-block; padding: 0.2rem 0.5rem; font-size: 0.8rem; border-radius: 4px; color: white; }
+    .社務例會 { background-color: #6c9bd2; }
+    .職業例會 { background-color: #f2a65a; }
+    .社服例會 { background-color: #63c29e; }
+    .國際例會 { background-color: #e07dc2; }
+    .gallery { display: flex; overflow-x: auto; gap: 0.5rem; margin-top: 0.5rem; }
+    .gallery img { height: 120px; border-radius: 6px; cursor: pointer; }
+    footer { text-align: center; background-color: #eee; padding: 1rem; font-size: 0.9rem; color: #555; }
+    .overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  }
+  .overlay-image {
+    max-width: 90vw;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+  }
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0 1rem;
+  }
+  .nav-btn.left { left: 1rem; }
+  .nav-btn.right { right: 1rem; }
+
+
+
+
+
+  .scroll-nav a {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border: 2px solid #005aaa;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #005aaa;
+  font-weight: bold;
+  background: linear-gradient(to bottom, #ffffff, #e0ecf8);
+  box-shadow: 0 4px 0 #004080, 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s, background 0.3s, box-shadow 0.2s;
+}
+
+.scroll-nav a:hover {
+  background: linear-gradient(to bottom, #d0e4f7, #a8cde8);
+  color: white;
+  box-shadow: 0 2px 0 #003060, 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-nav a:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #002040, 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  flex: 1 1 auto;
+  color: #003366;
+}
+
+.card-header .info {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.card-header .tag {
+  flex-shrink: 0;
+}
+  </style>
+</head>
+<body>
+  <header style="width: 100%">
+    <img src="images/banner.jpg" alt="主視覺圖" style="width: 100%; height: auto; display: block;">
+  </header>
+  <div class="scroll-container">
+    <nav class="scroll-nav">
+      <a href="#activities">任務總覽</a>
+      <a href="#about">資料室</a>
+      <a href="#follow">榮譽記事</a>
+      <a href="#activities">行事曆</a>
+    </nav>
+  </div>
+
+
+<!-- ✅ 放在 </body> 前，含關閉按鈕、左右切換、手機滑動支援 -->
+<div id="overlay" class="overlay" ontouchstart="touchStart(event)" ontouchmove="touchMove(event)" ontouchend="touchEnd()" onclick="closeOverlay()">
+  <button class="close-btn" onclick="closeOverlay(); event.stopPropagation();">&times;</button>
+  <button class="nav-btn left" onclick="prevImage(); event.stopPropagation();">&#10094;</button>
+  <img id="overlayImage" class="overlay-image" src="" alt="" onclick="event.stopPropagation();">
+  <button class="nav-btn right" onclick="nextImage(); event.stopPropagation();">&#10095;</button>
+</div>
+
+  <main>
+    <section class="section" id="activities">
+      <h2>🗂️ 修煉任務 23場例會</h2>
+      
+<div class="filter-bar">
+  <button class="tab-btn active" data-type="all">全部</button>
+  <button class="tab-btn" data-type="社務例會">社務例會</button>
+  <button class="tab-btn" data-type="職業例會">職業例會</button>
+  <button class="tab-btn" data-type="社服例會">社服例會</button>
+  <button class="tab-btn" data-type="國際例會">國際例會</button>
+</div>
+
+<div class="card-grid">
+        
+  
+   <div class="card" data-type="社務例會">
+  <div class="card-header">
+    <h3>溜冰趣</h3>
+    <span class="info">例次：481</span>
+    <span class="tag 社務例會">社務例會</span>
+  </div>
+  <div class="gallery">
+    <img src="images/meeting_481_1.jpg" alt="溜冰趣 圖片1">
+    <img src="images/meeting_481_2.jpg" alt="溜冰趣 圖片2">
+    <img src="images/meeting_481_3.jpg" alt="溜冰趣 圖片3">
+  </div>
+</div>
+
+      
+<div class="card" data-type="社務例會">
+  <div class="card-header">
+    <h3>慶功宴</h3>
+    <span class="info">例次：482</span>
+    <span class="tag 社務例會">社務例會</span>
+  </div>
+  <div class="gallery">
+    <img src="images/meeting_482_1.jpg" alt="慶功宴 圖片1">
+    <img src="images/meeting_482_2.jpg" alt="慶功宴 圖片2">
+    <img src="images/meeting_482_3.jpg" alt="慶功宴 圖片3">
+    <img src="images/meeting_482_4.jpg" alt="慶功宴 圖片4">
+    <img src="images/meeting_482_5.jpg" alt="慶功宴 圖片5">
+  </div>
+</div>
+
+<div class="card" data-type="社服例會">
+  <div class="card-header">
+    <h3>淨山</h3>
+    <span class="info">例次：483</span>
+    <span class="tag 社服例會">社服例會</span>
+  </div>
+  <div class="gallery">
+    <img src="images/meeting_483_1.jpg" alt="淨山 圖片1">
+    <img src="images/meeting_483_2.jpg" alt="淨山 圖片2">
+    <img src="images/meeting_483_3.jpg" alt="淨山 圖片3">
+    <img src="images/meeting_483_4.jpg" alt="淨山 圖片4">
+    <img src="images/meeting_483_5.jpg" alt="淨山 圖片5">
+  </div>
+</div>
+<div class="card" data-type="社務例會">
+  <div class="card-header">
+    <h3>地區公訪</h3>
+    <span class="info">例次：484</span>
+    <span class="tag 社務例會">社務例會</span>
+  </div>
+  <div class="gallery">
+    <img src="images/meeting_484_1.jpg" alt="地區公訪 圖片1">
+    <img src="images/meeting_484_2.jpg" alt="地區公訪 圖片2">
+    <img src="images/meeting_484_3.jpg" alt="地區公訪 圖片3">
+    <img src="images/meeting_484_4.jpg" alt="地區公訪 圖片4">
+    <img src="images/meeting_484_5.jpg" alt="地區公訪 圖片5">
+  </div>
+</div>
+
+<div class="card" data-type="國際例會">
+  <div class="card-header">
+    <h3>食字路口</h3>
+    <span class="info">例次：485</span>
+    <span class="tag 國際例會">國際例會</span>
+  </div>
+  <div class="gallery">
+    <img src="images/meeting_485_1.jpg" alt="食字路口 圖片1">
+    <img src="images/meeting_485_2.jpg" alt="食字路口 圖片2">
+    <img src="images/meeting_485_3.jpg" alt="食字路口 圖片3">
+    <img src="images/meeting_485_4.jpg" alt="食字路口 圖片4">
+    <img src="images/meeting_485_5.jpg" alt="食字路口 圖片5">
+  </div>
+</div>
+  <div class="card" data-type="社服例會">
+    <div class="card-header">
+      <h3>第七分區捐血</h3>
+      <span class="info">例次：486</span>
+      <span class="tag 社服例會">社服例會</span>
+    </div>
+    <div class="gallery">
+      <img src="images/meeting_486_1.jpg" alt="第七分區捐血活動 圖片1">
+      <img src="images/meeting_486_2.jpg" alt="第七分區捐血活動 圖片2">
+      <img src="images/meeting_486_3.jpg" alt="第七分區捐血活動 圖片3">
+      <img src="images/meeting_486_4.jpg" alt="第七分區捐血活動 圖片4">
+      <img src="images/meeting_486_5.jpg" alt="第七分區捐血活動 圖片5">
+      <img src="images/meeting_486_6.jpg" alt="第七分區捐血活動 圖片6">
+    </div> </div>
+    <div class="card" data-type="職業例會">
+      <div class="card-header">
+        <h3>與社長有約</h3>
+        <span class="info">例次：487</span>
+        <span class="tag 職業例會">職業例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_487_1.jpg" alt="與社長有約 圖片1">
+        <img src="images/meeting_487_2.jpg" alt="與社長有約 圖片2">
+        <img src="images/meeting_487_3.jpg" alt="與社長有約 圖片3">
+        <img src="images/meeting_487_4.jpg" alt="與社長有約 圖片4">
+        <img src="images/meeting_487_5.jpg" alt="與社長有約 圖片5">
+        <img src="images/meeting_487_6.jpg" alt="與社長有約 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="社務例會">
+      <div class="card-header">
+        <h3>生活營</h3>
+        <span class="info">例次：488</span>
+        <span class="tag 社務例會">社務例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_488_1.jpg" alt="生活營 圖片1">
+        <img src="images/meeting_488_2.jpg" alt="生活營 圖片2">
+        <img src="images/meeting_488_3.jpg" alt="生活營 圖片3">
+        <img src="images/meeting_488_4.jpg" alt="生活營 圖片4">
+        <img src="images/meeting_488_5.jpg" alt="生活營 圖片5">
+        <img src="images/meeting_488_6.jpg" alt="生活營 圖片6">
+      </div>
+    </div>
+    <div class="card" data-type="社務例會">
+      <div class="card-header">
+        <h3>城市尋寶例會</h3>
+        <span class="info">例次：489</span>
+        <span class="tag 社務例會">社務例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_489_1.jpg" alt="城市尋寶例會 圖片1">
+        <img src="images/meeting_489_2.jpg" alt="城市尋寶例會 圖片2">
+        <img src="images/meeting_489_3.jpg" alt="城市尋寶例會 圖片3">
+        <img src="images/meeting_489_4.jpg" alt="城市尋寶例會 圖片4">
+        <img src="images/meeting_489_5.jpg" alt="城市尋寶例會 圖片5">
+        <img src="images/meeting_489_6.jpg" alt="城市尋寶例會 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="職業例會">
+      <div class="card-header">
+        <h3>老闆我有話要說</h3>
+        <span class="info">例次：490</span>
+        <span class="tag 職業例會">職業例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_490_1.jpg" alt="老闆我有話要說 圖片1">
+        <img src="images/meeting_490_2.jpg" alt="老闆我有話要說 圖片2">
+        <img src="images/meeting_490_3.jpg" alt="老闆我有話要說 圖片3">
+        <img src="images/meeting_490_4.jpg" alt="老闆我有話要說 圖片4">
+        <img src="images/meeting_490_5.jpg" alt="老闆我有話要說 圖片5">
+        <img src="images/meeting_490_6.jpg" alt="老闆我有話要說 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="社服例會">
+      <div class="card-header">
+        <h3>援助小農</h3>
+        <span class="info">例次：491</span>
+        <span class="tag 社服例會">社服例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_491_1.jpg" alt="援助小農 圖片1">
+        <img src="images/meeting_491_2.jpg" alt="援助小農 圖片2">
+        <img src="images/meeting_491_3.jpg" alt="援助小農 圖片3">
+        <img src="images/meeting_491_4.jpg" alt="援助小農 圖片4">
+        <img src="images/meeting_491_5.jpg" alt="援助小農 圖片5">
+        <img src="images/meeting_491_6.jpg" alt="援助小農 圖片6">
+      </div>
+    </div>
+    <div class="card" data-type="社務例會">
+      <div class="card-header">
+        <h3>社長理事選舉</h3>
+        <span class="info">例次：492</span>
+        <span class="tag 社務例會">社務例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_492_1.jpg" alt="社長理事選舉 圖片1">
+        <img src="images/meeting_492_2.jpg" alt="社長理事選舉 圖片2">
+        <img src="images/meeting_492_3.jpg" alt="社長理事選舉 圖片3">
+        <img src="images/meeting_492_4.jpg" alt="社長理事選舉 圖片4">
+        <img src="images/meeting_492_5.jpg" alt="社長理事選舉 圖片5">
+        <img src="images/meeting_492_6.jpg" alt="社長理事選舉 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="國際例會">
+      <div class="card-header">
+        <h3>日韓初級會話</h3>
+        <span class="info">例次：493</span>
+        <span class="tag 國際例會">國際例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_493_1.jpg" alt="日韓初級會話 圖片1">
+        <img src="images/meeting_493_2.jpg" alt="日韓初級會話 圖片2">
+        <img src="images/meeting_493_3.jpg" alt="日韓初級會話 圖片3">
+        <img src="images/meeting_493_4.jpg" alt="日韓初級會話 圖片4">
+        <img src="images/meeting_493_5.jpg" alt="日韓初級會話 圖片5">
+        <img src="images/meeting_493_6.jpg" alt="日韓初級會話 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="社務例會">
+      <div class="card-header">
+        <h3>新春團拜暨春酒</h3>
+        <span class="info">例次：494</span>
+        <span class="tag 社務例會">社務例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_494_1.jpg" alt="新春團拜暨春酒 圖片1">
+        <img src="images/meeting_494_2.jpg" alt="新春團拜暨春酒 圖片2">
+        <img src="images/meeting_494_3.jpg" alt="新春團拜暨春酒 圖片3">
+        <img src="images/meeting_494_4.jpg" alt="新春團拜暨春酒 圖片4">
+        <img src="images/meeting_494_5.jpg" alt="新春團拜暨春酒 圖片5">
+        <img src="images/meeting_494_6.jpg" alt="新春團拜暨春酒 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="社務例會">
+      <div class="card-header">
+        <h3>幹部訓練</h3>
+        <span class="info">例次：495</span>
+        <span class="tag 社務例會">社務例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_495_1.jpg" alt="幹部訓練 圖片1">
+        <img src="images/meeting_495_2.jpg" alt="幹部訓練 圖片2">
+        <img src="images/meeting_495_3.jpg" alt="幹部訓練 圖片3">
+        <img src="images/meeting_495_4.jpg" alt="幹部訓練 圖片4">
+        <img src="images/meeting_495_5.jpg" alt="幹部訓練 圖片5">
+        <img src="images/meeting_495_6.jpg" alt="幹部訓練 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="職業例會">
+      <div class="card-header">
+        <h3>特殊職業-道士</h3>
+        <span class="info">例次：496</span>
+        <span class="tag 職業例會">職業例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_496_1.jpg" alt="特殊職業-道士 圖片1">
+        <img src="images/meeting_496_2.jpg" alt="特殊職業-道士 圖片2">
+        <img src="images/meeting_496_3.jpg" alt="特殊職業-道士 圖片3">
+        <img src="images/meeting_496_4.jpg" alt="特殊職業-道士 圖片4">
+        <img src="images/meeting_496_5.jpg" alt="特殊職業-道士 圖片5">
+        <img src="images/meeting_496_6.jpg" alt="特殊職業-道士 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="國際例會">
+      <div class="card-header">
+        <h3>國際大富翁</h3>
+        <span class="info">例次：497</span>
+        <span class="tag 國際例會">國際例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_497_1.jpg" alt="國際大富翁 圖片1">
+        <img src="images/meeting_497_2.jpg" alt="國際大富翁 圖片2">
+        <img src="images/meeting_497_3.jpg" alt="國際大富翁 圖片3">
+        <img src="images/meeting_497_4.jpg" alt="國際大富翁 圖片4">
+        <img src="images/meeting_497_5.jpg" alt="國際大富翁 圖片5">
+        <img src="images/meeting_497_6.jpg" alt="國際大富翁 圖片6">
+      </div>
+    </div>
+    <div class="card" data-type="職業例會">
+      <div class="card-header">
+        <h3>合辦例會-口說</h3>
+        <span class="info">例次：498</span>
+        <span class="tag 職業例會">職業例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_498_1.jpg" alt="合辦例會-口說 圖片1">
+        <img src="images/meeting_498_2.jpg" alt="合辦例會-口說 圖片2">
+        <img src="images/meeting_498_3.jpg" alt="合辦例會-口說 圖片3">
+        <img src="images/meeting_498_4.jpg" alt="合辦例會-口說 圖片4">
+        <img src="images/meeting_498_5.jpg" alt="合辦例會-口說 圖片5">
+        <img src="images/meeting_498_6.jpg" alt="合辦例會-口說 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="國際例會">
+      <div class="card-header">
+        <h3>潑水節</h3>
+        <span class="info">例次：499</span>
+        <span class="tag 國際例會">國際例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_499_1.jpg" alt="潑水節 圖片1">
+        <img src="images/meeting_499_2.jpg" alt="潑水節 圖片2">
+        <img src="images/meeting_499_3.jpg" alt="潑水節 圖片3">
+        <img src="images/meeting_499_4.jpg" alt="潑水節 圖片4">
+        <img src="images/meeting_499_5.jpg" alt="潑水節 圖片5">
+        <img src="images/meeting_499_6.jpg" alt="潑水節 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="職業例會">
+      <div class="card-header">
+        <h3>特殊職業-禮儀師</h3>
+        <span class="info">例次：500</span>
+        <span class="tag 職業例會">職業例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_500_1.jpg" alt="特殊職業-禮儀師 圖片1">
+        <img src="images/meeting_500_2.jpg" alt="特殊職業-禮儀師 圖片2">
+        <img src="images/meeting_500_3.jpg" alt="特殊職業-禮儀師 圖片3">
+        <img src="images/meeting_500_4.jpg" alt="特殊職業-禮儀師 圖片4">
+        <img src="images/meeting_500_5.jpg" alt="特殊職業-禮儀師 圖片5">
+        <img src="images/meeting_500_6.jpg" alt="特殊職業-禮儀師 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="社服例會">
+      <div class="card-header">
+        <h3>卓媽媽狗場</h3>
+        <span class="info">例次：501</span>
+        <span class="tag 社服例會">社服例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_501_1.jpg" alt="卓媽媽狗場 圖片1">
+        <img src="images/meeting_501_2.jpg" alt="卓媽媽狗場 圖片2">
+        <img src="images/meeting_501_3.jpg" alt="卓媽媽狗場 圖片3">
+        <img src="images/meeting_501_4.jpg" alt="卓媽媽狗場 圖片4">
+        <img src="images/meeting_501_5.jpg" alt="卓媽媽狗場 圖片5">
+        <img src="images/meeting_501_6.jpg" alt="卓媽媽狗場 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="社務例會">
+      <div class="card-header">
+        <h3>射箭趣</h3>
+        <span class="info">例次：502</span>
+        <span class="tag 社務例會">社務例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_502_1.jpg" alt="射箭趣 圖片1">
+        <img src="images/meeting_502_2.jpg" alt="射箭趣 圖片2">
+        <img src="images/meeting_502_3.jpg" alt="射箭趣 圖片3">
+        <img src="images/meeting_502_4.jpg" alt="射箭趣 圖片4">
+        <img src="images/meeting_502_5.jpg" alt="射箭趣 圖片5">
+        <img src="images/meeting_502_6.jpg" alt="射箭趣 圖片6">
+      </div>
+    </div>
+    
+    <div class="card" data-type="社務例會">
+      <div class="card-header">
+        <h3>社慶暨交接</h3>
+        <span class="info">例次：503</span>
+        <span class="tag 社務例會">社務例會</span>
+      </div>
+      <div class="gallery">
+        <img src="images/meeting_503_1.jpg" alt="社慶暨交接 圖片1">
+        <img src="images/meeting_503_2.jpg" alt="社慶暨交接 圖片2">
+        <img src="images/meeting_503_3.jpg" alt="社慶暨交接 圖片3">
+        <img src="images/meeting_503_4.jpg" alt="社慶暨交接 圖片4">
+        <img src="images/meeting_503_5.jpg" alt="社慶暨交接 圖片5">
+        <img src="images/meeting_503_6.jpg" alt="社慶暨交接 圖片6">
+      </div>
+    </div>
+      </div>
+    </section>
+  
+    <section class="section" id="follow">
+      <h2>📢 最新消息中心</h2>
+      <p style="text-align:center;">
+        <a href="https://www.instagram.com/3482_bakhai_rotaract/" target="_blank" style="display:inline-block;background-color:#e1306c;color:white;padding:0.75rem 1.5rem;border-radius:6px;text-decoration:none;font-weight:bold;">
+          👉 追蹤我們的 IG
+        </a>
+      </p>
+    </section>
+
+    <section class="section" id="about">
+      <h2>📎 社員資料室</h2>
+      <p>北海扶青社是一個充滿熱情、團結、有點中二魂的青年社團，致力於服務、學習與歡樂交朋友！</p>
+      <div class="gallery">
+    <img src="images/cert_1.jpg" alt="證書 1" style="max-width: 100%; height: auto; border-radius: 8px;">
+  </div>
+    </section>
+    </main>
+
+
+  <footer>
+    北海扶青社 Ⓒ 2025 All rights reserved. <br>網站製作 I.P.P. Melody
+  </footer>
+
+
+
+  
+<script>
+  
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const type = btn.dataset.type;
+      document.querySelectorAll('.card').forEach(card => {
+        if (type === 'all' || card.dataset.type === type) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  let currentImages = [];
+  let currentIndex = 0;
+  let touchStartX = 0;
+
+  function openOverlay(images, index) {
+    currentImages = images;
+    currentIndex = index;
+    document.getElementById('overlayImage').src = currentImages[currentIndex];
+    document.getElementById('overlay').style.display = 'flex';
+  }
+
+  function closeOverlay() {
+    document.getElementById('overlay').style.display = 'none';
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % currentImages.length;
+    document.getElementById('overlayImage').src = currentImages[currentIndex];
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+    document.getElementById('overlayImage').src = currentImages[currentIndex];
+  }
+
+  // 🔽 綁定每張 .gallery img 點擊
+  document.querySelectorAll('.gallery').forEach(gallery => {
+    const imgs = gallery.querySelectorAll('img');
+    const srcs = Array.from(imgs).map(img => img.src);
+    imgs.forEach((img, index) => {
+      img.addEventListener('click', e => {
+        e.stopPropagation();
+        openOverlay(srcs, index);
+      });
+    });
+  });
+
+  // 🔽 手機左右滑動切換
+  function touchStart(event) {
+    touchStartX = event.touches[0].clientX;
+  }
+  function touchMove(event) {
+    const deltaX = event.touches[0].clientX - touchStartX;
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
+        prevImage();
+      } else {
+        nextImage();
+      }
+      touchStartX = event.touches[0].clientX;
+    }
+  }
+  function touchEnd() {
+    touchStartX = 0;
+  }
+</script>
+
+
+
+
+
+
+</body>
+</html>
