@@ -6,6 +6,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>北海株式會社 - 社畜小菜鳥社刊</title>
   <style>
+
+    /* 回頂按鈕樣式 */
+#backToTop {
+  position: fixed;
+  bottom: 40px;
+  right: 20px;
+  z-index: 999;
+  background-color: #005aaa;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: none; /* 預設隱藏 */
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+#backToTop:hover {
+  background-color: #003f7f;
+  transform: scale(1.1);
+}
+    h2 {
+     text-align: center;color: #003366;margin-bottom: 1.5rem;font-size: 1.3rem; 
+    }
+    
     body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8f8f8; color: #333; margin: 0; padding: 0; }
     nav { background-color: #005aaa; display: flex; justify-content: center; padding: 1rem; }
     nav a { color: white; text-decoration: none; margin: 0 1rem; font-weight: bold; }
@@ -13,7 +41,7 @@
     .filter-bar button { padding: 0.5rem 1rem; border: none; border-radius: 20px; cursor: pointer; background-color: #ccc; }
     .filter-bar button.active { background-color: #005aaa; color: white; }
     main { padding: 0 1rem; max-width: 960px; margin: auto; }
-    .section { margin-bottom: 3rem; }
+    .section { margin-bottom: 0rem; }
     .section h2 { text-align: center;color: #003366;font-size: 1.3rem; }
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
     .card { background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); padding: 1rem; transition: transform 0.2s; }
@@ -155,13 +183,8 @@
 
 .calligraphy-gallery {
   text-align: center;
-  padding: 2rem 1rem;
 }
 
-.calligraphy-gallery h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-}
 
 .ink-grid {
   display: grid;
@@ -170,9 +193,11 @@
 }
 
 .ink-grid img {
-  width: 100%;
+  width: 80%; /* 圖片寬度調小一點，例如 80% */
+  max-width: 300px; /* 設定最大寬度限制，避免太大 */
   height: auto;
-  border: 1px solid #ccc;
+  margin: 0 auto; /* 水平置中 */
+  display: block; /* 必須配合 block 才能 margin: auto 生效 */
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
@@ -330,23 +355,100 @@ tbody tr:nth-child(even) {
   font-size: 1rem;
   line-height: 1.5;
 }
+.calendar-section {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.calendar-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  overflow-x: auto;
+}
+
+.calendar-wrapper img {
+  width: 100%;
+  height: auto;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.img-wrapper {
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
 
+
+.ig-follow-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+
+.ig-animated-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #e1306c;
+  color: white;
+  padding: 0.7rem 1.4rem;
+  border-radius: 50px;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 1rem;
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 0 rgba(225, 48, 108, 0.4);
+  transition: transform 0.2s;
+}
+.ig-animated-btn:hover {
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(225, 48, 108, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(225, 48, 108, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(225, 48, 108, 0);
+  }
+}
+
+.ig-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
 </style>
 
 
 
 </head>
 <body>
+  <!-- 🔝 回頂按鈕 -->
+<button id="backToTop" title="回頂端">↑</button>
+
   <header style="width: 100%">
     <img src="images/banner.jpg" alt="主視覺圖" style="width: 100%; height: auto; display: block;">
   </header>
   <div class="scroll-container">
     <nav class="scroll-nav">
       <a href="#activities">任務紀錄</a>
-      <a href="#about">資料室</a>
-      <a href="#follow">榮譽記事</a>
-      <a href="#activities">行事曆</a>
+      <a href="#ink">長官來賀</a>
+      <a href="#info">資料室</a>
+      <a href="#follow">會社介紹</a>
     </nav>
   </div>
 
@@ -363,7 +465,7 @@ tbody tr:nth-child(even) {
   <main>
 
 <section class="event-schedule" id="event-schedule">
-  <h2>社慶活動流程</h2>
+  <h2>⏰ 社畜打卡慶典全攻略</h2>
   <div class="schedule-list">
     <div class="schedule-item"><strong>13:30–14:00</strong>｜註冊聯誼（Wendy、Angela）</div>
     <div class="schedule-item"><strong>14:00–14:03</strong>｜短劇一（全體社員）</div>
@@ -399,7 +501,7 @@ tbody tr:nth-child(even) {
 
 
     <section class="section" id="activities">
-      <h2>🗂️ 修煉任務 23場例會</h2>
+      <h2>🗂️ 修煉任務總計23場例會</h2>
       
 <div class="filter-bar">
   <button class="tab-btn active" data-type="all">全部</button>
@@ -705,8 +807,8 @@ tbody tr:nth-child(even) {
   
 
 
-<section class="calligraphy-gallery">
-  <h2>墨寶展示</h2>
+<section class="calligraphy-gallery" id="ink">
+  <h2>🎖️ 長官墨寶賀詞</h2>
   <div class="ink-grid">
     <img src="images/ink/ink1.png" alt="地區代表賀詞">
     <img src="images/ink/ink2.png" alt="扶青主委墨寶">
@@ -717,7 +819,7 @@ tbody tr:nth-child(even) {
 </section>
 
 <section class="presidents-gallery" id="presidents">
-  <h2>歷屆社長名單</h2>
+  <h2> 📎 歷屆社長名單</h2>
   <div class="table-wrapper" style="overflow-x: auto;">
     <table>
       <thead>
@@ -781,23 +883,39 @@ tbody tr:nth-child(even) {
     </table>
   </div>
 </section>
-
-    <section class="section" id="follow">
-      <h2>📢 最新消息中心</h2>
-      <p style="text-align:center;">
-        <a href="https://www.instagram.com/3482_bakhai_rotaract/" target="_blank" style="display:inline-block;background-color:#e1306c;color:white;padding:0.75rem 1.5rem;border-radius:6px;text-decoration:none;font-weight:bold;">
-          👉 追蹤我們的 IG
-        </a>
-      </p>
-    </section>
-
-    <section class="section" id="about">
-      <h2>📎 社員資料室</h2>
-      <p>北海扶青社是一個充滿熱情、團結、有點中二魂的青年社團，致力於服務、學習與歡樂交朋友！</p>
-      <div class="gallery">
-    <img src="images/cert_1.jpg" alt="證書 1" style="max-width: 100%; height: auto; border-radius: 8px;">
+<section id="calendar">
+  <h2>📅 24-25年度行事曆</h2>
+  <div class="calendar-wrapper">
+    <img src="images/calendar.jpg" alt="2425 年度行事曆">
   </div>
-    </section>
+<section class="section" id="follow">
+  <h2>📢 關於北海扶青社</h2>
+  
+  <div class="img-wrapper">
+    <img src="images/logome.png" alt="社徽">
+    <p style="text-align: center; font-size: 0.95rem; color: #333;">
+      <strong>Bak Hai Together！</strong><br>
+      社徽以手寫「Bak Hai」為主視覺，展現我們自由、活力、團結的精神。
+      黃色象徵熱情與太陽，藍色象徵穩定與海洋，「TOGETHER」代表我們一起修煉成長。
+    </p>
+  </div>
+
+  <div class="img-wrapper">
+    <img src="images/cert_1.jpg" alt="2425 年度行事曆">
+  </div>
+  <p style="text-align: center; font-size: 0.95rem; color: #333;">
+    特製的黃色球衣是北海扶輪青年服務社的特色，在人群中總是一眼就能發現我們的存在，每個人都擁有自己的背號，我們就像是一支無人能敵的球隊，團結、互助、熱情、默契，歡迎加入北海！
+  </p>
+
+  <!-- ✅ 置中的 IG 按鈕 -->
+  <div class="ig-follow-wrapper">
+    <a href="https://www.instagram.com/3482_bakhai_rotaract/" target="_blank" class="ig-animated-btn">
+      <img src="images/iglogo.svg" alt="IG" class="ig-icon">
+      追蹤北海扶青社IG
+    </a>
+  </div>
+</section>
+
     </main>
 
 
@@ -880,6 +998,27 @@ tbody tr:nth-child(even) {
   function touchEnd() {
     touchStartX = 0;
   }
+
+
+ 
+  // 顯示與隱藏按鈕
+  const backToTopBtn = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      backToTopBtn.style.display = "block";
+    } else {
+      backToTopBtn.style.display = "none";
+    }
+  });
+
+  // 滑動回頂部
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
 </script>
 
 
