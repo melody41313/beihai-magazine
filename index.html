@@ -12,9 +12,9 @@
     .filter-bar { display: flex; justify-content: center; gap: 1rem; margin: 2rem 0 1rem; }
     .filter-bar button { padding: 0.5rem 1rem; border: none; border-radius: 20px; cursor: pointer; background-color: #ccc; }
     .filter-bar button.active { background-color: #005aaa; color: white; }
-    main { padding: 2rem; max-width: 960px; margin: auto; }
+    main { padding: 0rem; max-width: 960px; margin: auto; }
     .section { margin-bottom: 3rem; }
-    .section h2 { border-left: 6px solid #005aaa; padding-left: 0.75rem; font-size: 1.8rem; }
+    .section h2 { text-align: center;color: #003366;font-size: 1.3rem; }
     .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
     .card { background: white; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); padding: 1rem; transition: transform 0.2s; }
     .card:hover { transform: scale(1.02); }
@@ -151,7 +151,191 @@
 .card-header .tag {
   flex-shrink: 0;
 }
-  </style>
+
+
+.calligraphy-gallery {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.calligraphy-gallery h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.ink-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.ink-grid img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.table-wrapper {
+  max-height: 300px;
+  overflow-x: auto;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin: 1rem 0;
+}
+
+table {
+  width: 100%;
+  min-width: 600px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+th, td {
+  padding: 0.8rem 1rem;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #005aaa;
+  color: #fff;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f0f4f8;
+}
+
+@media (max-width: 768px) {
+  table {
+    font-size: 0.85rem;
+  }
+  th, td {
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+
+
+
+.event-flow {
+  padding: 2rem 1rem;
+  background: #f9fbfd;
+}
+.event-flow h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #003366;
+}
+.timeline {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+.event {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: flex-start;
+}
+.event .time {
+  min-width: 90px;
+  font-weight: bold;
+  color: #005aaa;
+  font-size: 0.95rem;
+}
+.event .content {
+  flex-grow: 1;
+  background: white;
+  padding: 0.5rem 1rem;
+  border-left: 3px solid #005aaa;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+@media (max-width: 768px) {
+  .event-flow h2 {
+    font-size: 1.4rem;
+  }
+  .event .time {
+    font-size: 0.85rem;
+  }
+  .event .content {
+    font-size: 0.85rem;
+  }
+}
+
+.table-scroll {
+  max-height: 300px; /* 固定高度 */
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.schedule-table th,
+.schedule-table td {
+  padding: 0.8rem;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+.schedule-table th {
+  background-color: #f8f8f8;
+  color: #333;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.event-schedule {
+  padding: 2rem 1rem;
+  background: #f7faff;
+  border-radius: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.event-schedule h2 {
+  text-align: center;
+  color: #003366;
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+}
+
+.schedule-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.schedule-item {
+  padding: 0.8rem 1rem;
+  background: white;
+  border-left: 4px solid #005aaa;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+
+</style>
+
+
+
 </head>
 <body>
   <header style="width: 100%">
@@ -159,12 +343,13 @@
   </header>
   <div class="scroll-container">
     <nav class="scroll-nav">
-      <a href="#activities">任務總覽</a>
+      <a href="#activities">任務紀錄</a>
       <a href="#about">資料室</a>
       <a href="#follow">榮譽記事</a>
       <a href="#activities">行事曆</a>
     </nav>
   </div>
+
 
 
 <!-- ✅ 放在 </body> 前，含關閉按鈕、左右切換、手機滑動支援 -->
@@ -176,6 +361,43 @@
 </div>
 
   <main>
+
+<section class="event-schedule" id="event-schedule">
+  <h2>社慶活動流程</h2>
+  <div class="schedule-list">
+    <div class="schedule-item"><strong>13:30–14:00</strong>｜註冊聯誼（Wendy、Angela）</div>
+    <div class="schedule-item"><strong>14:00–14:03</strong>｜短劇一（全體社員）</div>
+    <div class="schedule-item"><strong>14:03–14:05</strong>｜聯合主席鳴鐘宣布例會開始（P.P. Jack）</div>
+    <div class="schedule-item"><strong>14:05–14:07</strong>｜宣讀扶青宗旨（P.P. Arcen）</div>
+    <div class="schedule-item"><strong>14:07–14:08</strong>｜大合照（Lily）</div>
+    <div class="schedule-item"><strong>14:08–14:09</strong>｜短劇二（全體社員）</div>
+    <div class="schedule-item"><strong>14:09–14:19</strong>｜聯誼介紹來賓（Wendy、Angela）</div>
+    <div class="schedule-item"><strong>14:19–14:24</strong>｜唱社歌（P.P. Arcen）</div>
+    <div class="schedule-item"><strong>14:24–14:26</strong>｜聯合主席致詞（P.P. Alice）</div>
+    <div class="schedule-item"><strong>14:26–14:36</strong>｜貴賓致詞（P.P. Stella）</div>
+    <div class="schedule-item"><strong>14:36–14:56</strong>｜活動遊戲交流（P.P. Kevin）</div>
+    <div class="schedule-item"><strong>14:56–15:00</strong>｜補介紹來賓（Wendy、Angela）</div>
+    <div class="schedule-item"><strong>15:00–15:10</strong>｜年度回顧（全體社員）</div>
+    <div class="schedule-item"><strong>15:10–15:25</strong>｜感謝時間（P.P. Katherine、社員&Uncle）</div>
+    <div class="schedule-item"><strong>15:25–15:35</strong>｜OB 時間（P.P. Kevin）</div>
+    <div class="schedule-item"><strong>15:35–15:40</strong>｜致贈 OB 禮物（P.P. Frank）</div>
+    <div class="schedule-item"><strong>15:40–16:00</strong>｜活動遊戲交流（P.P. Kevin）</div>
+    <div class="schedule-item"><strong>16:00–16:15</strong>｜短劇三（全體社員）</div>
+    <div class="schedule-item"><strong>16:15–16:20</strong>｜社長交接儀式（P. Leo）</div>
+    <div class="schedule-item"><strong>16:20–16:25</strong>｜社長上任感言（P. Leo）</div>
+    <div class="schedule-item"><strong>16:25–16:35</strong>｜24-25 幹部介紹、頒發聘書（P. Leo）</div>
+    <div class="schedule-item"><strong>16:35–16:45</strong>｜短劇＋慶生（全體社員）</div>
+    <div class="schedule-item"><strong>16:45–16:48</strong>｜糾察報告</div>
+    <div class="schedule-item"><strong>16:48–16:50</strong>｜秘書報告（S. Wendy）</div>
+    <div class="schedule-item"><strong>16:50–16:55</strong>｜輔導主委講評（P.P. Chuck）</div>
+    <div class="schedule-item"><strong>16:55–16:57</strong>｜主席鳴鐘宣布結束（P. Leo）</div>
+    <div class="schedule-item"><strong>16:57–17:00</strong>｜大合照（Lily）</div>
+  </div>
+</section>
+
+
+
+
     <section class="section" id="activities">
       <h2>🗂️ 修煉任務 23場例會</h2>
       
@@ -274,7 +496,7 @@
       <img src="images/meeting_486_3.jpg" alt="第七分區捐血活動 圖片3">
       <img src="images/meeting_486_4.jpg" alt="第七分區捐血活動 圖片4">
       <img src="images/meeting_486_5.jpg" alt="第七分區捐血活動 圖片5">
-      <img src="images/meeting_486_6.jpg" alt="第七分區捐血活動 圖片6">
+  
     </div> </div>
     <div class="card" data-type="職業例會">
       <div class="card-header">
@@ -305,6 +527,7 @@
         <img src="images/meeting_488_4.jpg" alt="生活營 圖片4">
         <img src="images/meeting_488_5.jpg" alt="生活營 圖片5">
         <img src="images/meeting_488_6.jpg" alt="生活營 圖片6">
+     <img src="images/meeting_488_7.jpg" alt="生活營 圖片7">
       </div>
     </div>
     <div class="card" data-type="社務例會">
@@ -366,7 +589,6 @@
         <img src="images/meeting_492_3.jpg" alt="社長理事選舉 圖片3">
         <img src="images/meeting_492_4.jpg" alt="社長理事選舉 圖片4">
         <img src="images/meeting_492_5.jpg" alt="社長理事選舉 圖片5">
-        <img src="images/meeting_492_6.jpg" alt="社長理事選舉 圖片6">
       </div>
     </div>
     
@@ -402,151 +624,164 @@
       </div>
     </div>
     
-    <div class="card" data-type="社務例會">
-      <div class="card-header">
-        <h3>幹部訓練</h3>
-        <span class="info">例次：495</span>
-        <span class="tag 社務例會">社務例會</span>
-      </div>
-      <div class="gallery">
-        <img src="images/meeting_495_1.jpg" alt="幹部訓練 圖片1">
-        <img src="images/meeting_495_2.jpg" alt="幹部訓練 圖片2">
-        <img src="images/meeting_495_3.jpg" alt="幹部訓練 圖片3">
-        <img src="images/meeting_495_4.jpg" alt="幹部訓練 圖片4">
-        <img src="images/meeting_495_5.jpg" alt="幹部訓練 圖片5">
-        <img src="images/meeting_495_6.jpg" alt="幹部訓練 圖片6">
-      </div>
-    </div>
+   
     
-    <div class="card" data-type="職業例會">
-      <div class="card-header">
-        <h3>特殊職業-道士</h3>
-        <span class="info">例次：496</span>
-        <span class="tag 職業例會">職業例會</span>
-      </div>
-      <div class="gallery">
-        <img src="images/meeting_496_1.jpg" alt="特殊職業-道士 圖片1">
-        <img src="images/meeting_496_2.jpg" alt="特殊職業-道士 圖片2">
-        <img src="images/meeting_496_3.jpg" alt="特殊職業-道士 圖片3">
-        <img src="images/meeting_496_4.jpg" alt="特殊職業-道士 圖片4">
-        <img src="images/meeting_496_5.jpg" alt="特殊職業-道士 圖片5">
-        <img src="images/meeting_496_6.jpg" alt="特殊職業-道士 圖片6">
-      </div>
-    </div>
+
     
     <div class="card" data-type="國際例會">
       <div class="card-header">
         <h3>國際大富翁</h3>
-        <span class="info">例次：497</span>
+        <span class="info">例次：496</span>
         <span class="tag 國際例會">國際例會</span>
       </div>
       <div class="gallery">
-        <img src="images/meeting_497_1.jpg" alt="國際大富翁 圖片1">
-        <img src="images/meeting_497_2.jpg" alt="國際大富翁 圖片2">
-        <img src="images/meeting_497_3.jpg" alt="國際大富翁 圖片3">
-        <img src="images/meeting_497_4.jpg" alt="國際大富翁 圖片4">
-        <img src="images/meeting_497_5.jpg" alt="國際大富翁 圖片5">
-        <img src="images/meeting_497_6.jpg" alt="國際大富翁 圖片6">
+        <img src="images/meeting_496_1.jpg" alt="國際大富翁 圖片1">
+        <img src="images/meeting_496_2.jpg" alt="國際大富翁 圖片2">
+        <img src="images/meeting_496_3.jpg" alt="國際大富翁 圖片3">
+        <img src="images/meeting_496_4.jpg" alt="國際大富翁 圖片4">
+        <img src="images/meeting_496_5.jpg" alt="國際大富翁 圖片5">
+        <img src="images/meeting_496_6.jpg" alt="國際大富翁 圖片6">
+                <img src="images/meeting_496_7.jpg" alt="國際大富翁 圖片7">
+                        <img src="images/meeting_496_8.jpg" alt="國際大富翁 圖片8">
       </div>
     </div>
     <div class="card" data-type="職業例會">
       <div class="card-header">
         <h3>合辦例會-口說</h3>
-        <span class="info">例次：498</span>
+        <span class="info">例次：497</span>
         <span class="tag 職業例會">職業例會</span>
       </div>
       <div class="gallery">
-        <img src="images/meeting_498_1.jpg" alt="合辦例會-口說 圖片1">
-        <img src="images/meeting_498_2.jpg" alt="合辦例會-口說 圖片2">
-        <img src="images/meeting_498_3.jpg" alt="合辦例會-口說 圖片3">
-        <img src="images/meeting_498_4.jpg" alt="合辦例會-口說 圖片4">
-        <img src="images/meeting_498_5.jpg" alt="合辦例會-口說 圖片5">
-        <img src="images/meeting_498_6.jpg" alt="合辦例會-口說 圖片6">
+        <img src="images/meeting_497_1.jpg" alt="合辦例會-口說 圖片1">
+        <img src="images/meeting_497_2.jpg" alt="合辦例會-口說 圖片2">
+        <img src="images/meeting_497_3.jpg" alt="合辦例會-口說 圖片3">
+        <img src="images/meeting_497_4.jpg" alt="合辦例會-口說 圖片4">
+        <img src="images/meeting_497_5.jpg" alt="合辦例會-口說 圖片5">
+    
       </div>
     </div>
     
-    <div class="card" data-type="國際例會">
-      <div class="card-header">
-        <h3>潑水節</h3>
-        <span class="info">例次：499</span>
-        <span class="tag 國際例會">國際例會</span>
-      </div>
-      <div class="gallery">
-        <img src="images/meeting_499_1.jpg" alt="潑水節 圖片1">
-        <img src="images/meeting_499_2.jpg" alt="潑水節 圖片2">
-        <img src="images/meeting_499_3.jpg" alt="潑水節 圖片3">
-        <img src="images/meeting_499_4.jpg" alt="潑水節 圖片4">
-        <img src="images/meeting_499_5.jpg" alt="潑水節 圖片5">
-        <img src="images/meeting_499_6.jpg" alt="潑水節 圖片6">
-      </div>
-    </div>
+  
     
     <div class="card" data-type="職業例會">
       <div class="card-header">
-        <h3>特殊職業-禮儀師</h3>
-        <span class="info">例次：500</span>
+        <h3>禮儀師</h3>
+        <span class="info">例次：499</span>
         <span class="tag 職業例會">職業例會</span>
       </div>
       <div class="gallery">
-        <img src="images/meeting_500_1.jpg" alt="特殊職業-禮儀師 圖片1">
-        <img src="images/meeting_500_2.jpg" alt="特殊職業-禮儀師 圖片2">
-        <img src="images/meeting_500_3.jpg" alt="特殊職業-禮儀師 圖片3">
-        <img src="images/meeting_500_4.jpg" alt="特殊職業-禮儀師 圖片4">
-        <img src="images/meeting_500_5.jpg" alt="特殊職業-禮儀師 圖片5">
-        <img src="images/meeting_500_6.jpg" alt="特殊職業-禮儀師 圖片6">
+        <img src="images/meeting_499_1.jpg" alt="特殊職業-禮儀師 圖片1">
+        <img src="images/meeting_499_2.jpg" alt="特殊職業-禮儀師 圖片2">
+        <img src="images/meeting_499_3.jpg" alt="特殊職業-禮儀師 圖片3">
+        <img src="images/meeting_499_4.jpg" alt="特殊職業-禮儀師 圖片4">
+        <img src="images/meeting_499_5.jpg" alt="特殊職業-禮儀師 圖片5">
+        <img src="images/meeting_499_6.jpg" alt="特殊職業-禮儀師 圖片6">
       </div>
     </div>
     
-    <div class="card" data-type="社服例會">
-      <div class="card-header">
-        <h3>卓媽媽狗場</h3>
-        <span class="info">例次：501</span>
-        <span class="tag 社服例會">社服例會</span>
-      </div>
-      <div class="gallery">
-        <img src="images/meeting_501_1.jpg" alt="卓媽媽狗場 圖片1">
-        <img src="images/meeting_501_2.jpg" alt="卓媽媽狗場 圖片2">
-        <img src="images/meeting_501_3.jpg" alt="卓媽媽狗場 圖片3">
-        <img src="images/meeting_501_4.jpg" alt="卓媽媽狗場 圖片4">
-        <img src="images/meeting_501_5.jpg" alt="卓媽媽狗場 圖片5">
-        <img src="images/meeting_501_6.jpg" alt="卓媽媽狗場 圖片6">
-      </div>
-    </div>
+   
     
     <div class="card" data-type="社務例會">
       <div class="card-header">
         <h3>射箭趣</h3>
-        <span class="info">例次：502</span>
+        <span class="info">例次：500</span>
         <span class="tag 社務例會">社務例會</span>
       </div>
       <div class="gallery">
-        <img src="images/meeting_502_1.jpg" alt="射箭趣 圖片1">
-        <img src="images/meeting_502_2.jpg" alt="射箭趣 圖片2">
-        <img src="images/meeting_502_3.jpg" alt="射箭趣 圖片3">
-        <img src="images/meeting_502_4.jpg" alt="射箭趣 圖片4">
-        <img src="images/meeting_502_5.jpg" alt="射箭趣 圖片5">
-        <img src="images/meeting_502_6.jpg" alt="射箭趣 圖片6">
+        <img src="images/meeting_500_1.jpg" alt="射箭趣 圖片1">
+        <img src="images/meeting_500_2.jpg" alt="射箭趣 圖片2">
+        <img src="images/meeting_500_3.jpg" alt="射箭趣 圖片3">
+        <img src="images/meeting_500_4.jpg" alt="射箭趣 圖片4">
+        <img src="images/meeting_500_5.jpg" alt="射箭趣 圖片5">
+        <img src="images/meeting_500_6.jpg" alt="射箭趣 圖片6">
+         <img src="images/meeting_500_7.jpg" alt="射箭趣 圖片7">
+          <img src="images/meeting_500_8.jpg" alt="射箭趣 圖片8">
       </div>
     </div>
     
-    <div class="card" data-type="社務例會">
-      <div class="card-header">
-        <h3>社慶暨交接</h3>
-        <span class="info">例次：503</span>
-        <span class="tag 社務例會">社務例會</span>
-      </div>
-      <div class="gallery">
-        <img src="images/meeting_503_1.jpg" alt="社慶暨交接 圖片1">
-        <img src="images/meeting_503_2.jpg" alt="社慶暨交接 圖片2">
-        <img src="images/meeting_503_3.jpg" alt="社慶暨交接 圖片3">
-        <img src="images/meeting_503_4.jpg" alt="社慶暨交接 圖片4">
-        <img src="images/meeting_503_5.jpg" alt="社慶暨交接 圖片5">
-        <img src="images/meeting_503_6.jpg" alt="社慶暨交接 圖片6">
-      </div>
-    </div>
+   
       </div>
     </section>
   
+
+
+<section class="calligraphy-gallery">
+  <h2>墨寶展示</h2>
+  <div class="ink-grid">
+    <img src="images/ink/ink1.png" alt="地區代表賀詞">
+    <img src="images/ink/ink2.png" alt="扶青主委墨寶">
+    <img src="images/ink/ink3.png" alt="總監賀詞">
+    <img src="images/ink/ink4.png" alt="社長墨寶">
+    <img src="images/ink/ink5.png" alt="輔導主委墨寶">
+  </div>
+</section>
+
+<section class="presidents-gallery" id="presidents">
+  <h2>歷屆社長名單</h2>
+  <div class="table-wrapper" style="overflow-x: auto;">
+    <table>
+      <thead>
+        <tr>
+          <th>屆別</th>
+          <th>輔導社社長</th>
+          <th>扶青社主委</th>
+          <th>扶青社社長</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>創團</td><td>傅聰敏</td><td>闕河生</td><td>闕玉婷</td></tr>
+        <tr><td>01-02</td><td>Fortune</td><td>Builder</td><td>Michelle</td></tr>
+        <tr><td>創團</td><td>林光裕</td><td>闕河生</td><td>闕玉婷</td></tr>
+        <tr><td>02-03</td><td>Stanley</td><td> Builder</td><td>Michelle</td></tr>
+        <tr><td>第二屆</td><td>唐得君</td><td>崔宏興</td><td>蔡俊賢</td></tr>
+        <tr><td>03-04</td><td>Elec</td><td>Insurance</td><td>Otis</td></tr>
+        <tr><td>第三屆</td><td>闕河生</td><td>林朝廷</td><td>楊明勳</td></tr>
+        <tr><td>04-05</td><td>Builder</td><td>Peter</td><td>Mitch</td></tr>
+        <tr><td>第四屆</td><td>廖信雄</td><td>林光裕</td><td>蘇柏瑋</td></tr>
+        <tr><td>05-06</td><td> Stephen</td><td>Stanley</td><td>Po</td></tr>
+        <tr><td>第五屆</td><td>詹信忠</td><td>唐得君</td><td>林雅雯</td></tr>
+        <tr><td>06-07</td><td>Water</td><td>Elec</td><td>Wendy</td></tr>
+        <tr><td>第六屆</td><td>蕭錦權</td><td>林鍵誠</td><td>高暐盈</td></tr>
+        <tr><td>07-08</td><td>Franklin</td><td>Jason</td><td>Willie</td></tr>
+        <tr><td>第七屆</td><td>崔宏興</td><td>廖信雄</td><td>李炯毅</td></tr>
+        <tr><td>08-09</td><td>Insurance</td><td>Stephen</td><td>Jerry</td></tr>
+        <tr><td>第八屆</td><td>陳賜榮</td><td>詹信忠</td><td>高嘉珮</td></tr>
+        <tr><td>09-10</td><td>Kevin</td><td>Water</td><td>Peggy</td></tr>
+        <tr><td>第九屆</td><td>黃文峰</td><td>蕭錦權</td><td>黃慶雲</td></tr>
+        <tr><td>10-11</td><td>Eric</td><td>Franklin</td><td>Ricky</td></tr>
+        <tr><td>第十屆</td><td>薛錫樑</td><td>陳賜榮</td><td>林茂荃</td></tr>
+        <tr><td>11-12</td><td>House</td><td>Kevin</td><td>Jimmy</td></tr>
+        <tr><td>第十一屆</td><td>楊承儒</td><td>黃文峰</td><td>楊閔</td></tr>
+        <tr><td>12-13</td><td>Office</td><td>Eric</td><td>Yamil</td></tr>
+        <tr><td>第十二屆</td><td>游文杰</td><td>薛錫樑</td><td>周辰汶</td></tr>
+        <tr><td>13-14</td><td> Motor</td><td>House</td><td>Wendy</td></tr>
+        <tr><td>第十三屆</td><td>林鍵誠</td><td>楊承儒</td><td>陳奕勳</td></tr>
+        <tr><td>14-15</td><td>Jason</td><td>Office</td><td>Jack</td></tr>
+        <tr><td>第十四屆</td><td>王世欽</td><td>王世欽</td><td>黃政瑋</td></tr>
+        <tr><td>15-16</td><td>Keith</td><td>Keith</td><td>Paul</td></tr>
+        <tr><td>第十五屆</td><td>顏仲謙</td><td>林鍵誠</td><td>賴恩廷</td></tr>
+        <tr><td>16-17</td><td>Andy</td><td>Jason</td><td>Rex</td></tr>
+        <tr><td>第十六屆</td><td>林孟盛</td><td>王世欽</td><td>韓一晴</td></tr>
+        <tr><td>17-18</td><td>Jack</td><td>Keith</td><td>Alice</td></tr>
+        <tr><td>第十七屆</td><td>葉銘功</td><td>顏仲謙</td><td>詹湘樺</td></tr>
+        <tr><td>18-19</td><td>Lawyer</td><td>Andy</td><td>Katherine</td></tr>
+        <tr><td>第十八屆</td><td>楊文良</td><td>林孟盛</td><td>許惠渝</td></tr>
+        <tr><td>19-20</td><td>Young</td><td>Jack</td><td>Stella</td></tr>
+        <tr><td>第十九屆</td><td>梁世倫</td><td>葉銘功</td><td>林宏宇</td></tr>
+        <tr><td>20-21</td><td>Allen</td><td> Lawyer</td><td>Frank</td></tr>
+        <tr><td>第二十屆</td><td>程普中</td><td>楊文良</td><td>葉一鳴</td></tr>
+        <tr><td>21-22</td><td>Mercedes</td><td>Young</td><td>Kevin</td></tr>
+        <tr><td>第二十一屆</td><td>李成偉</td><td>梁世倫</td><td>陳鈺聖</td></tr>
+        <tr><td>22-23</td><td>Chuck</td><td>Allen</td><td>Arcen</td></tr>
+        <tr><td>第二十二屆</td><td>黃立忠</td><td>程普中</td><td>呂姵萱</td></tr>
+        <tr><td>23-24</td><td> Alex</td><td>Mercedes</td><td>Melody</td></tr>
+        <tr><td>第二十三屆</td><td>陳力豪</td><td>李成偉</td><td>吳任哲</td></tr>
+        <tr><td>24-25</td><td>Howard</td><td>Chuck</td><td>Eric</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
     <section class="section" id="follow">
       <h2>📢 最新消息中心</h2>
       <p style="text-align:center;">
@@ -567,7 +802,7 @@
 
 
   <footer>
-    北海扶青社 Ⓒ 2025 All rights reserved. <br>網站製作 I.P.P. Melody
+    北海扶青社 Ⓒ 2025 All rights reserved. <br>網站製作 P.P. Melody
   </footer>
 
 
