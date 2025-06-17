@@ -71,15 +71,26 @@
 
 .scroll-container {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  white-space: nowrap;
+  -webkit-overflow-scrolling: touch; /* iOS 滑順滾動 */
 }
 
 .scroll-nav {
-  display: inline-flex;
-
+  display: flex;
+  min-width: max-content;
 }
 
+/* 桌機寬度，讓按鈕置中對齊 */
+@media (min-width: 768px) {
+  .scroll-container {
+    justify-content: center;
+    overflow-x: visible;
+  }
+  .scroll-nav {
+    justify-content: center;
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+}
 
 
   .scroll-nav a {
