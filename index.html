@@ -72,12 +72,12 @@
 .scroll-container {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch; /* iOS 滑順滾動 */
+  background-color: #005aaa;  /* ✅ 加這個避免看到白邊 */        /* ✅ 增加上下間距讓按鈕不會卡邊 */
 }
 
 .scroll-nav {
   display: flex;
-gap: 0.01rem; /* 控制按鈕間距 */
-  box-sizing: border-box;
+  min-width: max-content;
 }
 
 /* 桌機寬度，讓按鈕置中對齊 */
