@@ -7,6 +7,8 @@
   <title>北海株式會社 - 社畜小菜鳥社刊</title>
   <style>
 
+
+
     /* 回頂按鈕樣式 */
 #backToTop {
   position: fixed;
@@ -431,14 +433,42 @@ tbody tr:nth-child(even) {
   width: 1.2rem;
   height: 1.2rem;
 }
+
+
+.marquee {
+  overflow: hidden;
+  position: relative;
+  background: #f8f8f8;
+  padding: 1rem 0;
+}
+
+.marquee-content {
+  display: flex;
+  width: calc(200%); /* 確保可以無縫輪播 */
+  animation: marquee 20s linear infinite;
+}
+
+.marquee-content img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-right: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 </style>
 
 
 
 </head>
 <body>
+
   <!-- 🔝 回頂按鈕 -->
-<button id="backToTop" title="回頂端">↑</button>
+<button id="backToTop" title="回頂端">⬆</button>
 
   <header style="width: 100%">
     <img src="images/banner.jpg" alt="主視覺圖" style="width: 100%; height: auto; display: block;">
@@ -447,7 +477,7 @@ tbody tr:nth-child(even) {
     <nav class="scroll-nav">
       <a href="#activities">任務紀錄</a>
       <a href="#ink">長官來賀</a>
-      <a href="#info">資料室</a>
+      <a href="#presidents">資料室</a>
       <a href="#follow">會社介紹</a>
     </nav>
   </div>
@@ -467,34 +497,34 @@ tbody tr:nth-child(even) {
 <section class="event-schedule" id="event-schedule">
   <h2>⏰ 社畜打卡慶典全攻略</h2>
   <div class="schedule-list">
-    <div class="schedule-item"><strong>13:30–14:00</strong>｜註冊聯誼（Wendy、Angela）</div>
-    <div class="schedule-item"><strong>14:00–14:03</strong>｜短劇一（全體社員）</div>
-    <div class="schedule-item"><strong>14:03–14:05</strong>｜聯合主席鳴鐘宣布例會開始（P.P. Jack）</div>
-    <div class="schedule-item"><strong>14:05–14:07</strong>｜宣讀扶青宗旨（P.P. Arcen）</div>
-    <div class="schedule-item"><strong>14:07–14:08</strong>｜大合照（Lily）</div>
-    <div class="schedule-item"><strong>14:08–14:09</strong>｜短劇二（全體社員）</div>
-    <div class="schedule-item"><strong>14:09–14:19</strong>｜聯誼介紹來賓（Wendy、Angela）</div>
-    <div class="schedule-item"><strong>14:19–14:24</strong>｜唱社歌（P.P. Arcen）</div>
-    <div class="schedule-item"><strong>14:24–14:26</strong>｜聯合主席致詞（P.P. Alice）</div>
-    <div class="schedule-item"><strong>14:26–14:36</strong>｜貴賓致詞（P.P. Stella）</div>
-    <div class="schedule-item"><strong>14:36–14:56</strong>｜活動遊戲交流（P.P. Kevin）</div>
-    <div class="schedule-item"><strong>14:56–15:00</strong>｜補介紹來賓（Wendy、Angela）</div>
-    <div class="schedule-item"><strong>15:00–15:10</strong>｜年度回顧（全體社員）</div>
-    <div class="schedule-item"><strong>15:10–15:25</strong>｜感謝時間（P.P. Katherine、社員&Uncle）</div>
-    <div class="schedule-item"><strong>15:25–15:35</strong>｜OB 時間（P.P. Kevin）</div>
-    <div class="schedule-item"><strong>15:35–15:40</strong>｜致贈 OB 禮物（P.P. Frank）</div>
-    <div class="schedule-item"><strong>15:40–16:00</strong>｜活動遊戲交流（P.P. Kevin）</div>
-    <div class="schedule-item"><strong>16:00–16:15</strong>｜短劇三（全體社員）</div>
-    <div class="schedule-item"><strong>16:15–16:20</strong>｜社長交接儀式（P. Leo）</div>
-    <div class="schedule-item"><strong>16:20–16:25</strong>｜社長上任感言（P. Leo）</div>
-    <div class="schedule-item"><strong>16:25–16:35</strong>｜24-25 幹部介紹、頒發聘書（P. Leo）</div>
-    <div class="schedule-item"><strong>16:35–16:45</strong>｜短劇＋慶生（全體社員）</div>
-    <div class="schedule-item"><strong>16:45–16:48</strong>｜糾察報告</div>
-    <div class="schedule-item"><strong>16:48–16:50</strong>｜秘書報告（S. Wendy）</div>
-    <div class="schedule-item"><strong>16:50–16:55</strong>｜輔導主委講評（P.P. Chuck）</div>
-    <div class="schedule-item"><strong>16:55–16:57</strong>｜主席鳴鐘宣布結束（P. Leo）</div>
-    <div class="schedule-item"><strong>16:57–17:00</strong>｜大合照（Lily）</div>
-  </div>
+  <div class="schedule-item"><strong>13:30–14:00</strong>｜註冊聯誼（Wendy、Angela）</div>
+  <div class="schedule-item"><strong>14:00–14:03</strong>｜短劇一（全體社員）</div>
+  <div class="schedule-item"><strong>14:03–14:05</strong>｜聯合主席鳴鐘宣布例會開始（P.P. Jack）</div>
+  <div class="schedule-item"><strong>14:05–14:07</strong>｜宣讀扶青宗旨（P.P. Arcen）</div>
+  <div class="schedule-item"><strong>14:07–14:08</strong>｜大合照（Lily）</div>
+  <div class="schedule-item"><strong>14:08–14:09</strong>｜短劇二（全體社員）</div>
+  <div class="schedule-item"><strong>14:09–14:19</strong>｜聯誼介紹來賓（Wendy、Angela）</div>
+  <div class="schedule-item"><strong>14:19–14:24</strong>｜唱社歌（P.P. Arcen）</div>
+  <div class="schedule-item"><strong>14:24–14:26</strong>｜聯合主席致詞（P.P. Alice）</div>
+  <div class="schedule-item"><strong>14:26–14:36</strong>｜貴賓致詞（P.P. Stella）</div>
+  <div class="schedule-item"><strong>14:36–14:56</strong>｜活動遊戲交流（P.P. Kevin）</div>
+  <div class="schedule-item"><strong>14:56–15:00</strong>｜補介紹來賓（Wendy、Angela）</div>
+  <div class="schedule-item"><strong>15:00–15:10</strong>｜年度回顧（全體社員）</div>
+  <div class="schedule-item"><strong>15:10–15:25</strong>｜感謝時間（P.P. Katherine、社員&Uncle）</div>
+  <div class="schedule-item"><strong>15:25–15:35</strong>｜OB 時間（P.P. Kevin）</div>
+  <div class="schedule-item"><strong>15:35–15:40</strong>｜致贈 OB 禮物（P.P. Frank）</div>
+  <div class="schedule-item"><strong>15:40–16:00</strong>｜活動遊戲交流（P.P. Kevin）</div>
+  <div class="schedule-item"><strong>16:00–16:15</strong>｜短劇三（全體社員）</div>
+  <div class="schedule-item"><strong>16:15–16:20</strong>｜社長交接儀式（P. Leo）</div>
+  <div class="schedule-item"><strong>16:20–16:25</strong>｜社長上任感言（P. Leo）</div>
+  <div class="schedule-item"><strong>16:25–16:35</strong>｜24-25 幹部介紹、頒發聘書（P. Leo）</div>
+  <div class="schedule-item"><strong>16:35–16:45</strong>｜短劇＋慶生（全體社員）</div>
+  <div class="schedule-item"><strong>16:45–16:48</strong>｜糾察報告</div>
+  <div class="schedule-item"><strong>16:48–16:50</strong>｜秘書報告（S. Wendy）</div>
+  <div class="schedule-item"><strong>16:50–16:55</strong>｜輔導主委講評（P.P. Chuck）</div>
+  <div class="schedule-item"><strong>16:55–16:57</strong>｜主席鳴鐘宣布結束（P. Leo）</div>
+  <div class="schedule-item"><strong>16:57–17:00</strong>｜大合照（Lily）</div>
+</div>
 </section>
 
 
@@ -811,10 +841,10 @@ tbody tr:nth-child(even) {
   <h2>🎖️ 長官墨寶賀詞</h2>
   <div class="ink-grid">
     <img src="images/ink/ink1.png" alt="地區代表賀詞">
-    <img src="images/ink/ink2.png" alt="扶青主委墨寶">
     <img src="images/ink/ink3.png" alt="總監賀詞">
     <img src="images/ink/ink4.png" alt="社長墨寶">
     <img src="images/ink/ink5.png" alt="輔導主委墨寶">
+    <img src="images/ink/ink2.png" alt="扶青主委墨寶">
   </div>
 </section>
 
@@ -888,7 +918,7 @@ tbody tr:nth-child(even) {
   <div class="calendar-wrapper">
     <img src="images/calendar.jpg" alt="2425 年度行事曆">
   </div>
-<section class="section" id="follow">
+<section class="section" id="follow"> 
   <h2>📢 關於北海扶青社</h2>
   
   <div class="img-wrapper">
@@ -901,11 +931,15 @@ tbody tr:nth-child(even) {
   </div>
 
   <div class="img-wrapper">
-    <img src="images/cert_1.jpg" alt="2425 年度行事曆">
+    <img src="images/cert_1.jpg" alt="證書">
   </div>
   <p style="text-align: center; font-size: 0.95rem; color: #333;">
     特製的黃色球衣是北海扶輪青年服務社的特色，在人群中總是一眼就能發現我們的存在，每個人都擁有自己的背號，我們就像是一支無人能敵的球隊，團結、互助、熱情、默契，歡迎加入北海！
   </p>
+   <h2>🎯 明年度活動計畫</h2>
+   <div class="calendar-wrapper">
+ <img src="images/calendar2.jpg" alt="2425 年度行事曆">
+  </div>
 
   <!-- ✅ 置中的 IG 按鈕 -->
   <div class="ig-follow-wrapper">
@@ -914,6 +948,19 @@ tbody tr:nth-child(even) {
       追蹤北海扶青社IG
     </a>
   </div>
+  <div class="marquee">
+  <div class="marquee-content">
+    <img src="images/igcover1.jpeg" alt="IG Cover 1">
+    <img src="images/igcover2.jpeg" alt="IG Cover 2">
+    <img src="images/igcover3.jpeg" alt="IG Cover 3">
+    <img src="images/igcover4.jpeg" alt="IG Cover 4">
+    <img src="images/igcover5.jpeg" alt="IG Cover 5">
+    <img src="images/igcover6.jpeg" alt="IG Cover 6">
+    <img src="images/igcover7.jpeg" alt="IG Cover 7">
+    <img src="images/igcover8.jpeg" alt="IG Cover 8">
+    <img src="images/igcover9.jpeg" alt="IG Cover 9">
+  </div>
+</div>
 </section>
 
     </main>
